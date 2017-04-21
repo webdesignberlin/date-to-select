@@ -1,0 +1,28 @@
+{
+  "name": "date-to-select",
+  "version": "0.1.0",
+  "description": "Select Fields as Date-Input Alternative",
+  "main": "./dist/index.js",
+  "scripts": {
+    "server": "browser-sync start --server \".\" --files \"**/*.html,dist/*.js\"",
+    "watchJS": "./node_modules/.bin/rollup src/index.js --format umd --name \"date-to-select\" --output dist/index.js --watch",
+    "dev": "concurrently --kill-others \"npm run server\" \"npm run watchJS\"",
+    "devbabel": "babel src --out-dir dist --source-maps inline --watch",
+    "build": "babel src --out-dir dist --source-maps inline",
+    "prepublish": "npm run build"
+  },
+  "keywords": [],
+  "author": "Michael Gerstmann @top_webdesign",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^3.4.0",
+    "moment": "^2.18.1",
+    "rollup": "^0.41.6",
+    "source-map-support": "^0.4.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-preset-es2015": "^6.6.0",
+    "rollup-watch": "^3.2.2"
+  }
+}
