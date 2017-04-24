@@ -35,7 +35,17 @@ export default class DateToSelect {
   setDay(day){
     let dateToSelect = this;
     let wrapper = dateToSelect._elWrapper.querySelector('.date-field--days');
-    wrapper.querySelector('[value="' + day + '"]').selected = true;
+
+    for(let option of wrapper.querySelectorAll('option')){
+      option.removeAttribute('selected');
+      option.selected = false;
+      if(option.value === day){
+        option.selected = true;
+        option.setAttribute('selected','selected');
+      }
+    }
+
+    //wrapper.querySelector('[value="' + day + '"]').selected = true;
   }
 
   /**
@@ -45,7 +55,17 @@ export default class DateToSelect {
   setMonth(month){
     let dateToSelect = this;
     let wrapper = dateToSelect._elWrapper.querySelector('.date-field--months');
-    wrapper.querySelector('[value="' + month + '"]').selected = true;
+
+    for(let option of wrapper.querySelectorAll('option')){
+      option.removeAttribute('selected');
+      option.selected = false;
+      if(option.value === month){
+        option.selected = true;
+        option.setAttribute('selected','selected');
+      }
+    }
+
+    //wrapper.querySelector('[value="' + month + '"]').selected = true;
   }
 
   /**
@@ -55,7 +75,17 @@ export default class DateToSelect {
   setYear(year){
     let dateToSelect = this;
     let wrapper = dateToSelect._elWrapper.querySelector('.date-field--years');
-    wrapper.querySelector('[value="' + year + '"]').selected = true;
+
+    for(let option of wrapper.querySelectorAll('option')){
+      option.removeAttribute('selected');
+      option.selected = false;
+      if(option.value === year){
+        option.selected = true;
+        option.setAttribute('selected','selected');
+      }
+    }
+
+    //wrapper.querySelector('[value="' + year + '"]').selected = true;
 
     dateToSelect.getDaysInMonth();
   }
@@ -125,6 +155,19 @@ export default class DateToSelect {
     }
   }
 
+  validateDate(){
+    let dateToSelect = this;
+    let valueYears = dateToSelect._elWrapper.querySelector('.date-field--years').value;
+    let valueMonths = dateToSelect._elWrapper.querySelector('.date-field--months').value;
+    let valueDays = dateToSelect._elWrapper.querySelector('.date-field--days').value;
+    let dateString = valueYears + '-' + valueMonths + '-' + valueDays;
+    if(moment(dateString).isValid()){
+      dateToSelect._elDateInput.value = dateString;
+    } else {
+      dateToSelect._elDateInput.value = '';
+    }
+  }
+
   /*handleDays(e){
     let dateToSelect = this;
     let wrapper = dateToSelect._elWrapper.querySelector('.date-field--days');
@@ -139,20 +182,27 @@ export default class DateToSelect {
     let dateToSelect = this;
     dateToSelect.renderMarkup();
     //console.log(dateToSelect.getInputDate());
-    dateToSelect.setDay('11');
-    dateToSelect.setMonth('08');
-    dateToSelect.setYear('1984');
+    //dateToSelect.setDay('11');
+    //dateToSelect.setMonth('08');
+    //dateToSelect.setYear('1984');
 
     let elYears = dateToSelect._elWrapper.querySelector('.date-field--years');
     let elMonths = dateToSelect._elWrapper.querySelector('.date-field--months');
     let elDays = dateToSelect._elWrapper.querySelector('.date-field--days');
 
-    console.log(elYears);
     elYears.addEventListener('change', function () {
+      dateToSelect.setYear(this.value);
       dateToSelect.getDaysInMonth();
+      dateToSelect.validateDate();
     });
     elMonths.addEventListener('change', function () {
+      dateToSelect.setMonth(this.value);
       dateToSelect.getDaysInMonth();
+      dateToSelect.validateDate();
+    });
+    elDays.addEventListener('change', function () {
+      dateToSelect.setDay(this.value);
+      dateToSelect.validateDate();
     });
 
     /*document.addEventListener('updateDaysInMonth', function(e){

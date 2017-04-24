@@ -59,6 +59,9 @@ ${content}
  */
 const tmplMonths = (months) => `
 <select class="date-field date-field--months">
+  <option class="date-field__item date-field__item--placeholder" disabled selected>
+    Monat
+  </option>
   ${months.map((month, i) =>
   `
   <option class="date-field__item" value="${month}">
@@ -75,6 +78,9 @@ const tmplMonths = (months) => `
  */
 const tmplYears = (years) => `
 <select class="date-field date-field--years">
+    <option class="date-field__item date-field__item--placeholder" disabled selected>
+    Jahr
+  </option>
   ${years.map((year, i) =>
   `
   <option class="date-field__item" value="${year}">
@@ -91,22 +97,25 @@ const tmplYears = (years) => `
  * @param {string} currentDay
  * @returns {string}
  */
-const printActiveDayClass = function(activeClass, currentDay){
+const printActiveDayIdentifier = function(activeClass, currentDay){
   if (activeClass === currentDay){
-    return 'date-field__item--active'
+    return 'selected';
   }
-  return ''
+  return 'nope';
 };
 
 const tmplDays = (options) => `
 <select class="date-field date-field--days">
+    <option class="date-field__item date-field__item--placeholder" disabled selected>
+    Tag
+  </option>
   ${options.days.map((day, i) =>
   `
-  <option class="date-field__item `+ printActiveDayClass(options.activeDay, day) +`" value="${day}">
+  <option class="date-field__item" value="${day}" ${printActiveDayIdentifier(options.activeDay, day)}>
       ${i+1}
   </option>
   `
-).join('')} 
+  ).join('')} 
 </select>
 `;
 
@@ -134,7 +143,6 @@ export default function generateMarkup(elTarget){
    * Add Event listener which fired on Month Update in date picker
    */
   document.addEventListener('updateDaysInMonth', function(e){
-    console.log('update days');
     let dayWrapper = document.querySelectorAll('.date-field--days');
     if(dayWrapper.length > 0){
       let mergedConfig = Object.assign({}, templateOptions, {
