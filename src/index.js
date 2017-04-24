@@ -6,4 +6,3 @@ let trigger = document.querySelector('.date-trigger');
 
 let dateToSelect = new DateToSelect(trigger);
 dateToSelect.init();
-console.log(dateToSelect);
