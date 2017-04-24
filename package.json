@@ -1,6 +1,6 @@
 {
   "name": "date-to-select",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Select Fields as Date-Input Alternative",
   "main": "./dist/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "watchJS": "./node_modules/.bin/rollup --config --watch",
     "dev": "concurrently --kill-others \"npm run server\" \"npm run watchJS\"",
     "devbabel": "babel src --out-dir dist --source-maps inline --watch",
-    "build": "babel src --out-dir dist --source-maps inline",
+    "build": "./node_modules/.bin/rollup --config",
     "prepublish": "npm run build"
   },
   "keywords": [],

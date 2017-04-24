@@ -1,7 +1,7 @@
 export default {
-  entry: 'src/demo.js',
-  dest: 'dist/demo.js',
+  entry: 'src/index.js',
+  dest: 'dist/index.js',
   moduleName: 'date-to-select',
-  format: 'umd',
+  format: 'es',
   external: [ 'moment' ]
 };
