@@ -1,6 +1,6 @@
 {
   "name": "date-to-select",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Select Fields as Date-Input Alternative",
   "main": "./dist/index.js",
   "scripts": {
